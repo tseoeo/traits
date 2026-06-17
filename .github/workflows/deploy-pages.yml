@@ -5,7 +5,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main, master, "claude/pensive-mendel-tbxm4p"]
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
@@ -30,9 +30,6 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          # Enable Pages (Actions source) automatically on first run.
-          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
