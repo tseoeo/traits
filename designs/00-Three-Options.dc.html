@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300;1,7..72,300&family=Golos+Text:wght@400;500&family=Archivo:wght@400;700&display=swap">
+<style>
+html, body { margin: 0; padding: 0; background: #E9E9E7; }
+* { box-sizing: border-box; }
+</style>
+</helmet>
+
+<div data-screen-label="Three options overview" style="min-height: 100vh; background: #E9E9E7; color: #1C1C1B; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: clamp(28px, 5vw, 72px) clamp(18px, 4vw, 64px) 80px;">
+
+  <header style="max-width: 880px;">
+    <img src="assets/traits-mark.png" alt="traits by lozeva" style="height: 58px; width: 58px; display: block; margin-bottom: 20px;">
+    <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.55;">traits by lozeva — site explorations</div>
+    <h1 style="margin: 14px 0 0; font-size: clamp(26px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.01em;">Three ways to show every photograph</h1>
+    <p style="margin: 18px 0 0; font-size: 15px; line-height: 1.75; max-width: 72ch; text-wrap: pretty;"><strong>traits by lozeva</strong> is a working portrait studio in Sofia, standing on a 1,412-portrait archive (2016–2026). All three options display that whole archive on one surface — they differ in <em>what the mass means</em>: a museum wall, a single current, or a strip of film. Each keeps the three real actions findable: <strong>Book a session</strong>, <strong>Gift vouchers</strong>, and <strong>Corporate &amp; editorial</strong> enquiries — present, never pushy. Shared across all three: equal treatment of every sitter, near-black or paper grounds, a БГ/EN toggle that carries between pages, decade-proof structure, and <code style="font-family: ui-monospace, monospace; font-size: 12px;">prefers-reduced-motion</code> respected. All names, venues, dates, and the dataset of 1,412 records are invented placeholders, and the action links (<code style="font-family: ui-monospace, monospace; font-size: 12px;">#book</code> / <code style="font-family: ui-monospace, monospace; font-size: 12px;">#vouchers</code>) are entry-point stubs to wire to real booking and voucher checkout.</p>
+  </header>
+
+  <div style="margin-top: clamp(32px, 5vw, 56px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(20px, 3vw, 36px); align-items: stretch;">
+
+    <!-- The Wall (kept) -->
+    <section style="background: #FFFFFF; border-radius: 10px; padding: 0 0 30px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(28, 28, 27, 0.1);">
+      <a href="02-The-Wall.dc.html" style="display: block; text-decoration: none; background: #111114; color: #ECEBE8; padding: 36px 26px; text-align: center;">
+        <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; max-width: 220px; margin: 0 auto 20px;">
+          <div style="aspect-ratio: 3/4; background: #2a2a2e;"></div><div style="aspect-ratio: 3/4; background: #3a3a40;"></div><div style="aspect-ratio: 3/4; background: #232327;"></div><div style="aspect-ratio: 3/4; background: #333339;"></div><div style="aspect-ratio: 3/4; background: #2c2c31;"></div><div style="aspect-ratio: 3/4; background: #1f1f23;"></div><div style="aspect-ratio: 3/4; background: #38383e;"></div><div style="aspect-ratio: 3/4; background: #28282c;"></div>
+          <div style="aspect-ratio: 3/4; background: #303035;"></div><div style="aspect-ratio: 3/4; background: #242428;"></div><div style="aspect-ratio: 3/4; background: #35353b;"></div><div style="aspect-ratio: 3/4; background: #2a2a2f;"></div><div style="aspect-ratio: 3/4; background: #1e1e22;"></div><div style="aspect-ratio: 3/4; background: #34343a;"></div><div style="aspect-ratio: 3/4; background: #292930;"></div><div style="aspect-ratio: 3/4; background: #313137;"></div>
+        </div>
+        <span style="display: block; font-family: 'Golos Text', system-ui, sans-serif; font-weight: 400; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.15;">1,412 portraits.</span>
+        <span style="display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.14em; opacity: 0.55;">ONE WALL · ONE ORDER</span>
+      </a>
+      <div style="padding: 26px 28px 0; display: flex; flex-direction: column; gap: 16px; flex: 1;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+          <h2 style="margin: 0; font-size: 19px; font-weight: 600;">The Wall <span style="font-weight: 400; opacity: 0.5; font-size: 13px;">— kept</span></h2>
+          <span style="font-size: 12px; opacity: 0.5;">gallery at night</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; text-wrap: pretty;"><strong>Thesis:</strong> the photographer is an institution, and the proof is visual mass. The page <em>is</em> the archive — a charcoal contact-sheet wall of all 1,412 frames, banded by year, faces emerging like silver-gelatin prints. Architectural, disciplined, chronological.</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.7; opacity: 0.85;">
+          <li><strong>Structure:</strong> rigid uniform grid, year bands, vertical scroll</li>
+          <li><strong>Ground:</strong> gallery-at-night charcoal; hover brightens, never scales</li>
+          <li><strong>Business:</strong> a <em>Book a session</em> button in the nav; a Corporate view of provenance-captioned work; vouchers in About</li>
+        </ul>
+        <a href="02-The-Wall.dc.html" style="margin-top: auto; align-self: flex-start; font-size: 13.5px; color: #0E2FC9; text-decoration: underline; text-underline-offset: 3px;">Open prototype →</a>
+      </div>
+    </section>
+
+    <!-- The Stream (new) -->
+    <section style="background: #FFFFFF; border-radius: 10px; padding: 0 0 30px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(28, 28, 27, 0.1);">
+      <a href="04-The-Stream.dc.html" style="display: block; text-decoration: none; background: #EEEBE4; color: #1B1814; padding: 36px 26px; text-align: center;">
+        <div style="column-count: 5; column-gap: 4px; max-width: 230px; margin: 0 auto 20px; text-align: left;">
+          <div style="aspect-ratio: 0.7; background: #cfc7b8; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.8; background: #c5bcab; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.72; background: #d2cabc; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.84; background: #c8bfae; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.68; background: #d4ccbd; margin-bottom: 4px;"></div>
+          <div style="aspect-ratio: 0.82; background: #cabfb0; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.7; background: #d0c8b9; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.78; background: #c6bdac; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.74; background: #cdc4b5; margin-bottom: 4px;"></div><div style="aspect-ratio: 0.8; background: #c3baa9; margin-bottom: 4px;"></div>
+        </div>
+        <span style="display: block; font-family: 'Literata', Georgia, serif; font-weight: 300; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.15;">One unbroken stream.</span>
+        <span style="display: block; margin-top: 8px; font-family: 'Literata', Georgia, serif; font-style: italic; font-weight: 300; font-size: 14px; opacity: 0.7;">no grid, no years</span>
+      </a>
+      <div style="padding: 26px 28px 0; display: flex; flex-direction: column; gap: 16px; flex: 1;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+          <h2 style="margin: 0; font-size: 19px; font-weight: 600;">The Stream <span style="font-weight: 400; opacity: 0.5; font-size: 13px;">— new</span></h2>
+          <span style="font-size: 12px; opacity: 0.5;">one current</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; text-wrap: pretty;"><strong>Thesis:</strong> remove the museum entirely. No grid, no year bands, no imposed order — the 1,412 portraits run together as a single justified current on warm paper, at reading size. Where the Wall is architecture, the Stream is humanist: the <em>faces</em> make the mass, not the scaffolding around them.</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.7; opacity: 0.85;">
+          <li><strong>Structure:</strong> continuous masonry flow, varied crops, no banding</li>
+          <li><strong>Ground:</strong> warm paper, faces large; rest reveals the name</li>
+          <li><strong>Business:</strong> a colophon footer — book, vouchers, corporate — set in the same quiet serif as the bio</li>
+        </ul>
+        <p style="margin: 0; font-size: 13px; line-height: 1.65; opacity: 0.65; text-wrap: pretty;"><strong>Honesty note:</strong> dropping the year bands trades legibility of <em>when</em> for pure flow; varied crops mean accepting non-uniform framing (the opposite of the Wall's typology), and faces at reading size make for a long scroll and heavy image load.</p>
+        <a href="04-The-Stream.dc.html" style="margin-top: auto; align-self: flex-start; font-size: 13.5px; color: #0E2FC9; text-decoration: underline; text-underline-offset: 3px;">Open prototype →</a>
+      </div>
+    </section>
+
+    <!-- The Reel (new) -->
+    <section style="background: #FFFFFF; border-radius: 10px; padding: 0 0 30px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(28, 28, 27, 0.1);">
+      <a href="05-The-Reel.dc.html" style="display: block; text-decoration: none; background: #0C0C0E; color: #E8E6E1; padding: 36px 26px; text-align: center;">
+        <div style="display: flex; gap: 4px; justify-content: center; align-items: flex-end; max-width: 240px; margin: 0 auto 20px; overflow: hidden;">
+          <div style="flex: 0 0 auto; width: 26px; aspect-ratio: 0.7; background: #303036;"></div><div style="flex: 0 0 auto; width: 30px; aspect-ratio: 0.68; background: #26262b;"></div><div style="flex: 0 0 auto; width: 24px; aspect-ratio: 0.72; background: #34343a;"></div><div style="flex: 0 0 auto; width: 32px; aspect-ratio: 0.66; background: #2a2a30;"></div><div style="flex: 0 0 auto; width: 27px; aspect-ratio: 0.7; background: #1f1f24;"></div><div style="flex: 0 0 auto; width: 22px; aspect-ratio: 0.74; background: #38383f;"></div><div style="flex: 0 0 auto; width: 30px; aspect-ratio: 0.68; background: #2c2c32;"></div>
+        </div>
+        <span style="display: block; font-family: 'Archivo', system-ui, sans-serif; font-weight: 700; font-size: clamp(30px, 3.4vw, 42px); line-height: 1; letter-spacing: -0.02em;">2016 → 2026</span>
+        <span style="display: block; margin-top: 10px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11px; opacity: 0.55;">scroll sideways through time</span>
+      </a>
+      <div style="padding: 26px 28px 0; display: flex; flex-direction: column; gap: 16px; flex: 1;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+          <h2 style="margin: 0; font-size: 19px; font-weight: 600;">The Reel <span style="font-weight: 400; opacity: 0.5; font-size: 13px;">— new</span></h2>
+          <span style="font-size: 12px; opacity: 0.5;">a strip of film</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; text-wrap: pretty;"><strong>Thesis:</strong> the archive as one continuous film strip. Navigation turns sideways — you <em>scrub</em> horizontally through ten years while a giant year ticks over as you travel. The sheer length of the roll is the body of work made physical: this strip runs on and on.</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.7; opacity: 0.85;">
+          <li><strong>Structure:</strong> single horizontal strip, chronological, frame-numbered</li>
+          <li><strong>Ground:</strong> lightbox black; a year scrubs as you drag or scroll</li>
+          <li><strong>Business:</strong> a <em>Book a session</em> chip in the header; book / vouchers / corporate in the end footer</li>
+        </ul>
+        <p style="margin: 0; font-size: 13px; line-height: 1.65; opacity: 0.65; text-wrap: pretty;"><strong>Honesty note:</strong> horizontal scroll fights web habits (mitigated: wheel maps to sideways, drag-to-pan) and shows few faces at once — it trades the Wall's instant all-at-once gestalt for a slower, temporal reveal. The length that's the point also makes it slow to traverse end to end.</p>
+        <a href="05-The-Reel.dc.html" style="margin-top: auto; align-self: flex-start; font-size: 13.5px; color: #0E2FC9; text-decoration: underline; text-underline-offset: 3px;">Open prototype →</a>
+      </div>
+    </section>
+  </div>
+
+  <footer style="margin-top: clamp(36px, 5vw, 60px); max-width: 880px; font-size: 13px; line-height: 1.7; opacity: 0.6; text-wrap: pretty;">Three positions on the same fact — 1,412 sittings, shown whole — with the studio's real actions (book, vouchers, corporate) carried through each. The Wall makes it architecture; the Stream makes it a current; the Reel makes it film. Pick one, or mix devices (e.g. the Reel's scrubbing year onto the Wall). The БГ/EN choice is shared — switching language in one carries to the others.</footer>
+</div>
+
+</x-dc>
+</body>
+</html>

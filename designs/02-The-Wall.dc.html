@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
+<style>
+html, body { margin: 0; padding: 0; background: #111114; }
+* { box-sizing: border-box; }
+::selection { background: #ECEBE8; color: #111114; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</helmet>
+
+<div data-screen-label="The Wall" style="min-height: 100vh; background: #111114; color: #ECEBE8; font-family: 'Golos Text', system-ui, sans-serif; padding-bottom: 64px;">
+
+  <header style="position: sticky; top: 0; z-index: 90; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding: 14px clamp(16px, 4vw, 44px); background: rgba(17, 17, 20, 0.95); border-bottom: 1px solid rgba(236, 235, 232, 0.14);">
+    <span style="display: inline-flex; align-items: center; gap: 10px; order: 0;">
+      <img src="assets/traits-mark-bright.png" alt="traits by lozeva" style="height: 32px; width: 32px; display: block;">
+      <span style="font-family: 'Literata', Georgia, serif; font-size: 16px; opacity: 0.6;">by lozeva</span>
+    </span>
+    <nav style="{{ sectionNavSt }}">
+      <button onClick="{{ goArchive }}" style="{{ navArchiveSt }}">{{ t.navArchive }}</button>
+      <button onClick="{{ goSeries }}" style="{{ navSeriesSt }}">{{ t.navSeries }}</button>
+      <button onClick="{{ goComm }}" style="{{ navCommSt }}">{{ t.navComm }}</button>
+      <button onClick="{{ goBio }}" style="{{ navBioSt }}">{{ t.navBio }}</button>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 14px; order: 2;">
+      <a href="#book" style="padding: 7px 16px; border: 1px solid #4E68F5; border-radius: 100px; font-size: 13px; letter-spacing: 0.02em; color: inherit; text-decoration: none; white-space: nowrap;" style-hover="background: #4E68F5; color: #0C0C0E; border-color: #4E68F5;">{{ t.book }}</a>
+      <span style="display: inline-flex; gap: 2px;">
+        <button onClick="{{ setBg }}" style="{{ bgBtnSt }}">БГ</button>
+        <span style="opacity: 0.3;">·</span>
+        <button onClick="{{ setEn }}" style="{{ enBtnSt }}">EN</button>
+      </span>
+    </div>
+  </header>
+
+  <sc-if value="{{ isArchive }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Archive wall" style="padding: clamp(18px, 4vw, 40px) clamp(12px, 3vw, 40px) 0;">
+      <div onMouseOver="{{ onCellOver }}" onClick="{{ onCellOver }}">
+        <sc-for list="{{ bands }}" as="band" hint-placeholder-count="4">
+          <div style="padding: 22px 0 6px; font-size: 12px; letter-spacing: 0.14em; opacity: 0.5;">{{ band.y }}</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 3px;">
+            <sc-for list="{{ band.cells }}" as="c" hint-placeholder-count="24">
+              <div data-i="{{ c.i }}" style="{{ c.st }}" style-hover="filter: brightness(1.35);"></div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isSeries }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Series" style="padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 44px) 0;">
+      <sc-for list="{{ seriesItems }}" as="s" hint-placeholder-count="4">
+        <div style="padding: 30px 0 36px; border-bottom: 1px solid rgba(236, 235, 232, 0.12);">
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; margin-bottom: 18px;">
+            <span style="font-size: clamp(20px, 2.4vw, 28px); font-weight: 500;">{{ s.title }}</span>
+            <span style="font-size: 13px; opacity: 0.5;">{{ s.years }}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px;">
+            <sc-for list="{{ s.plates }}" as="p" hint-placeholder-count="6">
+              <div style="{{ p.st }}" style-hover="filter: brightness(1.25);"></div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isComm }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Corporate" style="padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 44px) 0;">
+      <div style="max-width: 64ch; margin-bottom: 12px;">
+        <h2 style="margin: 0 0 12px; font-size: clamp(22px, 2.8vw, 32px); font-weight: 500;">{{ t.corpTitle }}</h2>
+        <p style="margin: 0; font-size: 15px; line-height: 1.8; opacity: 0.78; text-wrap: pretty;">{{ t.corpIntro }}</p>
+      </div>
+      <sc-for list="{{ commItems }}" as="g" hint-placeholder-count="6">
+        <div style="padding: 26px 0 32px; border-bottom: 1px solid rgba(236, 235, 232, 0.12);">
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; margin-bottom: 16px;">
+            <span style="font-size: 15px;">{{ g.cap }}</span>
+            <span style="font-size: 13px; opacity: 0.5;">{{ g.years }}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 6px;">
+            <sc-for list="{{ g.plates }}" as="p" hint-placeholder-count="8">
+              <div style="{{ p.st }}" style-hover="filter: brightness(1.25);"></div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <p style="margin: 30px 0 0; font-size: 14.5px; line-height: 1.8; opacity: 0.85;">{{ t.corpLine }} <a href="mailto:hello@traitsbylozeva.com" style="color: #6E83FF; text-decoration: underline; text-underline-offset: 3px;">hello@traitsbylozeva.com</a></p>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isBio }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Contact" style="padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 44px) 0; max-width: 640px;">
+      <h2 style="margin: 0 0 18px; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.5;">{{ t.contactHead }}</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href="#book" style="padding: 11px 20px; border-radius: 100px; background: #4E68F5; color: #FFFFFF; font-size: 14px; font-weight: 500; text-decoration: none;" style-hover="opacity: 0.85;">{{ t.book }} →</a>
+        <a href="#vouchers" style="padding: 11px 20px; border-radius: 100px; border: 1px solid rgba(236, 235, 232, 0.4); color: inherit; font-size: 14px; text-decoration: none;" style-hover="border-color: #4E68F5; color: #4E68F5;">{{ t.vouchers }} →</a>
+        <a href="mailto:hello@traitsbylozeva.com" style="padding: 11px 20px; border-radius: 100px; border: 1px solid rgba(236, 235, 232, 0.4); color: inherit; font-size: 14px; text-decoration: none;" style-hover="border-color: #4E68F5; color: #4E68F5;">{{ t.corp }} →</a>
+      </div>
+      <p style="margin: 18px 0 0; font-size: 14px; line-height: 1.8; opacity: 0.7;">{{ t.studioCity }} · <a href="mailto:hello@traitsbylozeva.com" style="color: #6E83FF; text-decoration: underline; text-underline-offset: 3px;">hello@traitsbylozeva.com</a></p>
+    </section>
+  </sc-if>
+
+  <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; padding: 11px clamp(16px, 4vw, 44px); background: rgba(17, 17, 20, 0.96); border-top: 1px solid rgba(236, 235, 232, 0.14); font-size: 13px; letter-spacing: 0.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ statusLine }}</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    lang: (typeof localStorage !== "undefined" && localStorage.getItem("lozeva-lang")) || "en",
+    sitters: null,
+    view: "archive",
+    hover: -1,
+    isMobile: typeof window !== "undefined" && window.matchMedia("(max-width: 640px)").matches
+  };
+
+  componentDidMount() {
+    if (typeof window !== "undefined") {
+      this._mq = window.matchMedia("(max-width: 640px)");
+      this._onMq = (e) => this.setState({ isMobile: e.matches });
+      this._mq.addEventListener("change", this._onMq);
+    }
+    import("./sitters.js").then((m) => this.setState({ sitters: m.SITTERS }));
+  }
+
+  componentWillUnmount() {
+    if (this._mq && this._onMq) this._mq.removeEventListener("change", this._onMq);
+  }
+
+  setLang(lang) {
+    try { localStorage.setItem("lozeva-lang", lang); } catch (e) {}
+    this.setState({ lang });
+  }
+
+  buildBands() {
+    if (this._bands && this._bandsSrc === this.state.sitters) return this._bands;
+    const src = this.state.sitters || [];
+    const byYear = new Map();
+    src.forEach((x, i) => {
+      if (!byYear.has(x.year)) byYear.set(x.year, []);
+      const t0 = x.t0;
+      const l1 = Math.round(20 + t0 * 22), l2 = Math.round(12 + t0 * 14);
+      byYear.get(x.year).push({
+        i: String(i),
+        st: {
+          aspectRatio: "3 / 4",
+          background: "linear-gradient(172deg, hsl(240 3% " + l1 + "%), hsl(240 4% " + l2 + "%))",
+          cursor: "default"
+        }
+      });
+    });
+    this._bands = [...byYear.keys()].sort().map((y) => ({ y: String(y), cells: byYear.get(y) }));
+    this._bandsSrc = this.state.sitters;
+    return this._bands;
+  }
+
+  plate(seed, j, big) {
+    const a = 26 + ((seed * 47 + j * 31) % 26);
+    const b = a - 12;
+    return { st: {
+      aspectRatio: big ? "4 / 5" : "3 / 4",
+      background: "linear-gradient(168deg, hsl(240 3% " + a + "%), hsl(240 4% " + b + "%))",
+      cursor: "default"
+    } };
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const EN = {
+      navArchive: "Archive", navSeries: "Series", navComm: "Corporate", navBio: "Contact",
+      book: "Book a session", vouchers: "Gift vouchers", corp: "Corporate enquiry",
+      wallTitle: "1,412 portraits. 2016–2026.",
+      wallSub: "Every sitting, year by year — the work behind the studio. One wall, one order. Rest on a frame for the name.",
+      bioHead: "About", exhHead: "Exhibitions", contactHead: "Sit for a portrait",
+      studioCity: "Studio in Sofia",
+      corpTitle: "Corporate & editorial",
+      corpIntro: "Leadership, team and editorial portraits, made on the same terms as everything on the wall. Selected commissions, shown as provenance — never as a pitch.",
+      corpLine: "For corporate and editorial commissions, write to",
+      bio: "Lozeva (b. 1971, Sofia) has photographed in black and white for the past ten years. Her portraits — politicians, writers, actors, scientists, and people otherwise unrecorded — are made in available light, on the same terms, with the same patience. Since 2016 she has kept a single continuous archive; it now holds more than fourteen hundred portraits. traits by lozeva is her working studio in Sofia: private sittings, gift vouchers, and corporate commissions, all entering the same archive on equal footing.",
+      series: [
+        { t: "The Writers", y: "2018 — ongoing" },
+        { t: "Stage", y: "2018–2022" },
+        { t: "Mothers", y: "2020" },
+        { t: "Silence", y: "2021–2024" }
+      ],
+      comms: [
+        { c: "for the Presidency", y: "2018–2024" },
+        { c: "for Kapital", y: "2016–2025" },
+        { c: "for the National Theatre", y: "2019–2023" },
+        { c: "for the Goethe-Institut", y: "2019–2024" },
+        { c: "for the Sofia Opera", y: "2017–2022" },
+        { c: "for Dnevnik", y: "2016–2021" }
+      ],
+      exhibitions: [
+        { y: "2026", t: "“Faces” — Sofia City Art Gallery, Sofia (forthcoming)" },
+        { y: "2025", t: "Month of Photography — Plovdiv" },
+        { y: "2024", t: "“Silence” — Goethe-Institut, Sofia" },
+        { y: "2023", t: "Galerie Klein — Berlin" },
+        { y: "2022", t: "“The Writers” — National Library, Sofia" },
+        { y: "2021", t: "Fotoraum — Vienna" },
+        { y: "2020", t: "“Stage” — Sofia" },
+        { y: "2018", t: "“Portrait Now” — Varna" },
+        { y: "2017", t: "First solo exhibition — Sofia" }
+      ],
+      statusDefault: "1,412 portraits · 2016–2026 · black and white · studio in Sofia"
+    };
+    const BG = {
+      navArchive: "Архив", navSeries: "Серии", navComm: "Корпоративно", navBio: "Контакт",
+      book: "Запазете час", vouchers: "Подаръчни ваучери", corp: "Корпоративно запитване",
+      wallTitle: "1 412 портрета. 2016–2026.",
+      wallSub: "Всяка среща, година по година — работата зад студиото. Една стена, един ред. Посочете кадър, за да видите името.",
+      bioHead: "За нас", exhHead: "Изложби", contactHead: "Запазете портрет",
+      studioCity: "Студио в София",
+      corpTitle: "Корпоративно и редакционно",
+      corpIntro: "Лидерски, екипни и редакционни портрети, направени при същите условия като всичко на стената. Избрани поръчки, показани като произход — никога като реклама.",
+      corpLine: "За корпоративни и редакционни поръчки пишете на",
+      bio: "Лозева (р. 1971, София) снима черно-бяла фотография през последните десет години. Портретите ѝ — политици, писатели, актьори, учени и хора, останали извън летописа — са правени на естествена светлина, при едни и същи условия, с едно и също търпение. От 2016 г. поддържа един непрекъснат архив; днес той съдържа повече от хиляда и четиристотин портрета. traits by lozeva е нейното работещо студио в София: частни сеанси, подаръчни ваучери и корпоративни поръчки — всички влизащи в един и същ архив при равни условия.",
+      series: [
+        { t: "„Писателите“", y: "2018 — продължава" },
+        { t: "„Сцена“", y: "2018–2022" },
+        { t: "„Майки“", y: "2020" },
+        { t: "„Тишина“", y: "2021–2024" }
+      ],
+      comms: [
+        { c: "за Президентството", y: "2018–2024" },
+        { c: "за „Капитал“", y: "2016–2025" },
+        { c: "за Народния театър", y: "2019–2023" },
+        { c: "за Гьоте-институт", y: "2019–2024" },
+        { c: "за Софийската опера", y: "2017–2022" },
+        { c: "за „Дневник“", y: "2016–2021" }
+      ],
+      exhibitions: [
+        { y: "2026", t: "„Лица“ — Софийска градска художествена галерия (предстояща)" },
+        { y: "2025", t: "Месец на фотографията — Пловдив" },
+        { y: "2024", t: "„Тишина“ — Гьоте-институт, София" },
+        { y: "2023", t: "Galerie Klein — Берлин" },
+        { y: "2022", t: "„Писателите“ — Национална библиотека, София" },
+        { y: "2021", t: "Fotoraum — Виена" },
+        { y: "2020", t: "„Сцена“ — София" },
+        { y: "2018", t: "„Портрет сега“ — Варна" },
+        { y: "2017", t: "Първа самостоятелна изложба — София" }
+      ],
+      statusDefault: "1 412 портрета · 2016–2026 · черно-бяло · студио в София"
+    };
+    const t = lang === "bg" ? BG : EN;
+    const bands = this.buildBands();
+    const src = this.state.sitters || [];
+
+    let statusLine = t.statusDefault;
+    const h = this.state.hover >= 0 ? src[this.state.hover] : null;
+    if (h && this.state.view === "archive") {
+      const prov = lang === "bg" ? h.cBg : h.cEn;
+      statusLine = (lang === "bg" ? h.bg : h.en) + " · " + h.year + (prov ? " · " + prov : "");
+    }
+
+    const seriesItems = t.series.map((s, si) => ({
+      title: s.t, years: s.y,
+      plates: [0, 1, 2, 3, 4, 5].map((j) => this.plate(si + 3, j, true))
+    }));
+    const commItems = t.comms.map((g, gi) => ({
+      cap: g.c, years: g.y,
+      plates: [0, 1, 2, 3, 4, 5, 6, 7].map((j) => this.plate(gi + 11, j, true))
+    }));
+
+    if (!this._onCellOver) {
+      this._onCellOver = (e) => {
+        const v = e.target && e.target.getAttribute && e.target.getAttribute("data-i");
+        if (v !== null && v !== "" && v !== undefined) {
+          const n = +v;
+          if (n !== this.state.hover) this.setState({ hover: n });
+        }
+      };
+      this._goArchive = () => this.setState({ view: "archive" });
+      this._goSeries = () => this.setState({ view: "series" });
+      this._goComm = () => this.setState({ view: "comm" });
+      this._goBio = () => this.setState({ view: "bio" });
+      this._setBg = () => this.setLang("bg");
+      this._setEn = () => this.setLang("en");
+    }
+
+    const navBtn = (active) => ({
+      background: "none", border: "none", padding: "2px 0", font: "inherit",
+      fontSize: "13px", letterSpacing: "0.04em", cursor: "pointer", color: "inherit",
+      whiteSpace: "nowrap", flex: "0 0 auto",
+      opacity: active ? 1 : 0.55,
+      borderBottom: active ? "1px solid rgba(236,235,232,0.7)" : "1px solid transparent"
+    });
+    const langBtn = (active) => ({
+      background: "none", border: "none", padding: "0 3px", font: "inherit",
+      fontSize: "13px", cursor: "pointer", color: "inherit",
+      opacity: active ? 1 : 0.4, fontWeight: active ? 500 : 400
+    });
+    const v = this.state.view;
+    const sectionNavBase = { display: "flex", alignItems: "center", fontSize: "13px", letterSpacing: "0.04em" };
+    const sectionNavSt = this.state.isMobile
+      ? Object.assign({}, sectionNavBase, { order: 3, flex: "1 0 100%", flexBasis: "100%", gap: "20px", flexWrap: "nowrap", overflowX: "auto", paddingBottom: "2px" })
+      : Object.assign({}, sectionNavBase, { order: 1, flex: "0 1 auto", gap: "8px 22px", flexWrap: "wrap" });
+
+    return {
+      t,
+      bands,
+      exhibitions: t.exhibitions,
+      seriesItems, commItems,
+      statusLine,
+      sectionNavSt,
+      isArchive: v === "archive", isSeries: v === "series", isComm: v === "comm", isBio: v === "bio",
+      onCellOver: this._onCellOver,
+      goArchive: this._goArchive, goSeries: this._goSeries, goComm: this._goComm, goBio: this._goBio,
+      setBg: this._setBg, setEn: this._setEn,
+      navArchiveSt: navBtn(v === "archive"), navSeriesSt: navBtn(v === "series"),
+      navCommSt: navBtn(v === "comm"), navBioSt: navBtn(v === "bio"),
+      bgBtnSt: langBtn(lang === "bg"), enBtnSt: langBtn(lang === "en")
+    };
+  }
+}
+
+</script>
+</body>
+</html>
