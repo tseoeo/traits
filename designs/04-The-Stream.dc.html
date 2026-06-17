@@ -135,7 +135,7 @@ class Component extends DCLogic {
           breakInside: "avoid",
           marginBottom: "10px",
           cursor: "default",
-          background: "linear-gradient(168deg, hsl(34 7% " + l1 + "%), hsl(34 6% " + l2 + "%))"
+          background: "url('photos/p" + String((i) % 243 + 1).padStart(3, "0") + ".jpg') center 35% / cover no-repeat, " + "linear-gradient(168deg, hsl(34 7% " + l1 + "%), hsl(34 6% " + l2 + "%))"
         }
       };
     });

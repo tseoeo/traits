@@ -199,7 +199,7 @@ class Component extends DCLogic {
           aspectRatio: String(ar.toFixed(3)),
           flex: "0 0 auto",
           cursor: "inherit",
-          background: "linear-gradient(168deg, hsl(240 3% " + l1 + "%), hsl(240 4% " + l2 + "%))"
+          background: "url('photos/p" + String((i) % 243 + 1).padStart(3, "0") + ".jpg') center 35% / cover no-repeat, " + "linear-gradient(168deg, hsl(240 3% " + l1 + "%), hsl(240 4% " + l2 + "%))"
         }
       };
     });

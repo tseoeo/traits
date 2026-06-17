@@ -156,7 +156,7 @@ class Component extends DCLogic {
         i: String(i),
         st: {
           aspectRatio: "3 / 4",
-          background: "linear-gradient(172deg, hsl(240 3% " + l1 + "%), hsl(240 4% " + l2 + "%))",
+          background: "url('photos/p" + String((i) % 243 + 1).padStart(3, "0") + ".jpg') center 35% / cover no-repeat, " + "linear-gradient(172deg, hsl(240 3% " + l1 + "%), hsl(240 4% " + l2 + "%))",
           cursor: "default"
         }
       });
@@ -171,7 +171,7 @@ class Component extends DCLogic {
     const b = a - 12;
     return { st: {
       aspectRatio: big ? "4 / 5" : "3 / 4",
-      background: "linear-gradient(168deg, hsl(240 3% " + a + "%), hsl(240 4% " + b + "%))",
+      background: "url('photos/p" + String((seed * 7 + j) % 243 + 1).padStart(3, "0") + ".jpg') center 35% / cover no-repeat, " + "linear-gradient(168deg, hsl(240 3% " + a + "%), hsl(240 4% " + b + "%))",
       cursor: "default"
     } };
   }
