@@ -126,16 +126,15 @@ class Component extends DCLogic {
     if (this._items && this._itemsSrc === this.state.sitters) return this._items;
     const src = this.state.sitters || [];
     this._items = src.map((x, i) => {
-      const ar = 0.64 + x.t0 * 0.2;
       const l1 = Math.round(60 + x.t0 * 16), l2 = Math.round(42 + x.t0 * 14);
       return {
         i: String(i),
         st: {
-          aspectRatio: String(ar.toFixed(3)),
+          aspectRatio: "1",
           breakInside: "avoid",
           marginBottom: "10px",
           cursor: "default",
-          background: "url('photos/p" + String((i) % 243 + 1).padStart(3, "0") + ".jpg') center 35% / cover no-repeat, " + "linear-gradient(168deg, hsl(34 7% " + l1 + "%), hsl(34 6% " + l2 + "%))"
+          background: "url('photos/p" + String((i) % 243 + 1).padStart(3, "0") + ".jpg') center 30% / cover no-repeat, " + "linear-gradient(168deg, hsl(34 7% " + l1 + "%), hsl(34 6% " + l2 + "%))"
         }
       };
     });
