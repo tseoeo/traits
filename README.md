@@ -1,27 +1,40 @@
-# traits by lozeva — design explorer
+# traits by lozeva
 
-A small GitHub Pages site that previews the **traits by lozeva** site explorations
-interactively — the same way they look in Claude Design. Each preview is the real
-prototype page, rendered live in a frame, with a desktop/mobile device toggle.
+A single self-contained static site: plain HTML, CSS, and a small amount of vanilla
+JavaScript. No framework, no build step, no npm. It is deployed to GitHub Pages straight
+from the repository root — what is in the repo is what is served.
 
 ## What's here
 
-- **`index.html`** — the explorer. Pick an option from the rail and it loads live
-  in the stage; toggle Desktop / Mobile, or open any page full-screen.
-- **`designs/`** — the prototypes exported from Claude Design (unchanged):
-  - `00-Three-Options.dc.html` — side-by-side overview of all three options
-  - `02-The-Wall.dc.html` — gallery-at-night contact-sheet wall, banded by year
-  - `04-The-Stream.dc.html` — warm-paper continuous current of faces
-  - `05-The-Reel.dc.html` — lightbox-black film strip you scrub through time
-  - `06-On-Mobile.dc.html` — all three at true phone width
-  - `support.js` — the Claude Design runtime (renders the `.dc.html` files;
-    auto-loads React from a CDN)
-  - `sitters.js` — the placeholder dataset of 1,412 invented sitter records
-  - `assets/` — the logo marks
+- **`index.html`** — the whole site. Markup, styles, and behaviour live in this one file
+  (inline `<style>` and `<script>`), so there is nothing to compile. It covers the portrait
+  gallery, a personal / corporate category toggle, a single-photo lightbox, the booking
+  section, and a Bulgarian ↔ English language toggle.
+- **`photos/personal/`** — 122 portraits, `p001.jpg`–`p122.jpg`.
+- **`photos/corporate/`** — 121 portraits, `p001.jpg`–`p121.jpg`.
+  Both folders hold low-resolution, face-cropped, black-and-white thumbnails at 360×480.
+- **`assets/traits-mark.png`** — the logo.
+- **`.github/workflows/deploy-pages.yml`** and **`.nojekyll`** — the Pages deploy. The
+  workflow publishes the repository root on every push to `main`; `.nojekyll` tells Pages to
+  serve the files as-is rather than running them through Jekyll.
 
-> The `.dc.html` files render via JavaScript and pull React from a CDN, so they
-> must be served over **HTTP** (GitHub Pages, or any local web server) — opening
-> them from `file://` won't work.
+## Swapping in the real photos
+
+**The personal / corporate split is an arbitrary placeholder.** The 243 portraits were
+divided into two folders purely to give each category something to show — the grouping
+carries no meaning, and nothing distinguishes a "personal" portrait from a "corporate" one.
+The photographer will replace them with the real sets.
+
+To swap a category, replace the files in its folder and keep the naming convention:
+sequential, zero-padded to three digits, starting at `p001.jpg`, with no gaps.
+
+Then update the count. **The per-category counts are declared once, in the `GALLERIES`
+object in `index.html`** — that is the single place to edit when the number of photos
+changes, and the only edit the swap requires:
+
+```js
+const GALLERIES = { personal: 122, corporate: 121 };
+```
 
 ## Enabling GitHub Pages
 
@@ -43,9 +56,23 @@ python3 -m http.server 8000
 # then open http://localhost:8000/
 ```
 
-## Notes
+## Notes and placeholders
 
-All names, venues, exhibitions, dates, and the 1,412-record dataset are invented
-placeholders. The `#book` / `#vouchers` links are entry-point stubs, and
-`hello@traitsbylozeva.com` is a placeholder address — wire them to the real
-booking, voucher checkout, and inbox when ready.
+Several things in the site are deliberately provisional and need real values before launch:
+
+- **The About paragraph and the exhibition list are invented placeholder copy**, generated as
+  filler while the layout was designed. They read plausibly, which is precisely what makes
+  them a hazard — they are not verified biography and must not be treated as fact. They are
+  marked in `index.html` with `<!-- PLACEHOLDER COPY — awaiting real text -->` comments so
+  they are easy to find. Awaiting real text.
+- **The personal / corporate photo split is arbitrary** — see above.
+- **The booking link `https://calendly.com/traitsbylozeva/sitting` is a placeholder URL.**
+  Swap it for the real scheduling link.
+- **`hello@traitsbylozeva.com` is a placeholder address.** Point it at the real inbox.
+- **The corporate enquiry form does not submit anywhere.** It validates input and shows a
+  success state, but sends nothing. A single commented `submitEnquiry()` function is left as
+  the seam for wiring a real endpoint — that is the only change needed to make it live.
+- **`#vouchers` is a stub** and links nowhere yet.
+
+Instagram — **`https://www.instagram.com/traits.lozeva/`** — is confirmed and correct. It is
+not a placeholder; leave it as it is.
