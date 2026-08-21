@@ -79,8 +79,6 @@ Several things in the site are deliberately provisional and need real values bef
   success copy no longer claims the enquiry was received; it points at Instagram instead.
 - **`#vouchers` had no target**, so the footer button now points at Instagram until a real
   vouchers page exists.
-- **The social preview image is a stock portrait** (`photos/personal/p001.jpg`, 360×480).
-  Replace `og:image` with a purpose-made 1200×630 asset when one exists.
 - **Session price and duration are deliberately not published on the site.** They are live on
   Calendly; putting them on the page is the photographer's commercial decision.
 

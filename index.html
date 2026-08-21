@@ -6,23 +6,25 @@
 <title>traits by lozeva — portraits</title>
 <meta id="meta-desc" name="description" content="Black-and-white portrait photography by lozeva. Studio in Sofia. Personal and corporate sittings by appointment.">
 
-<!-- Social preview. The site is shared mostly via Instagram, so links need a card.
-     og:image is an existing portrait (360x480) — replace with a purpose-made
-     1200x630 asset when one exists. -->
+<!-- Social preview. One 1200x630 card serves every platform — Discord, iMessage,
+     WhatsApp, Facebook, Messenger, X, LinkedIn, Slack and Telegram all read these
+     same tags and render at ~1.91:1. Absolute URLs are required: crawlers do not
+     resolve relative image paths. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="traits by lozeva">
 <meta property="og:url" content="https://tseoeo.github.io/traits/">
 <meta id="og-title" property="og:title" content="traits by lozeva — portraits">
 <meta id="og-desc" property="og:description" content="Black-and-white portrait photography by lozeva. Studio in Sofia. Personal and corporate sittings by appointment.">
-<meta property="og:image" content="https://tseoeo.github.io/traits/photos/personal/p001.jpg">
-<meta property="og:image:width" content="360">
-<meta property="og:image:height" content="480">
-<meta property="og:image:alt" content="Black-and-white portrait — traits by lozeva">
+<meta property="og:image" content="https://tseoeo.github.io/traits/assets/og-card.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta id="og-image-alt" property="og:image:alt" content="A grid of black-and-white portraits behind the traits by lozeva logo.">
 <meta id="og-locale" property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta id="tw-title" name="twitter:title" content="traits by lozeva — portraits">
 <meta id="tw-desc" name="twitter:description" content="Black-and-white portrait photography by lozeva. Studio in Sofia. Personal and corporate sittings by appointment.">
-<meta name="twitter:image" content="https://tseoeo.github.io/traits/photos/personal/p001.jpg">
+<meta name="twitter:image" content="https://tseoeo.github.io/traits/assets/og-card.jpg">
 <link rel="icon" type="image/png" href="assets/traits-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
@@ -792,6 +794,7 @@ body.lb-open { overflow: hidden; }
   var EN = {
     title: "traits by lozeva — portraits",
     metaDesc: "Black-and-white portrait photography by lozeva. Studio in Sofia. Personal and corporate sittings by appointment.",
+    ogImageAlt: "A grid of black-and-white portraits behind the traits by lozeva logo.",
     srTitle: "traits by lozeva",
     skip: "Skip to the portraits",
     byLozeva: "by lozeva",
@@ -859,6 +862,7 @@ body.lb-open { overflow: hidden; }
   var BG = {
     title: "traits by lozeva — портрети",
     metaDesc: "Черно-бяла портретна фотография от lozeva. Студио в София. Лични и корпоративни сеанси по уговорка.",
+    ogImageAlt: "Мрежа от черно-бели портрети зад логото на traits by lozeva.",
     srTitle: "traits by lozeva",
     skip: "Към портретите",
     byLozeva: "by lozeva",
@@ -947,6 +951,7 @@ body.lb-open { overflow: hidden; }
   var ogTitle = document.getElementById("og-title");
   var ogDesc = document.getElementById("og-desc");
   var ogLocale = document.getElementById("og-locale");
+  var ogImageAlt = document.getElementById("og-image-alt");
   var twTitle = document.getElementById("tw-title");
   var twDesc = document.getElementById("tw-desc");
   var exhWrap = document.getElementById("exhibitions");
@@ -963,6 +968,7 @@ body.lb-open { overflow: hidden; }
       if (twTitle) twTitle.setAttribute("content", t("title"));
       if (ogDesc) ogDesc.setAttribute("content", t("metaDesc"));
       if (twDesc) twDesc.setAttribute("content", t("metaDesc"));
+      if (ogImageAlt) ogImageAlt.setAttribute("content", t("ogImageAlt"));
       if (ogLocale) ogLocale.setAttribute("content", lang === "bg" ? "bg_BG" : "en_GB");
       document.getElementById("lang-bg").setAttribute("aria-pressed", String(lang === "bg"));
       document.getElementById("lang-en").setAttribute("aria-pressed", String(lang === "en"));
