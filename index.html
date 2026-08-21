@@ -503,8 +503,6 @@ body.lb-open { overflow: hidden; }
 .foot-btn.primary:hover { opacity: 0.85; }
 .foot-btn.ghost { border: 1px solid var(--hair-strong); color: inherit; }
 .foot-btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
-.foot-meta { margin: 18px 0 0; font-size: 14px; line-height: 1.8; opacity: 0.7; }
-.foot-meta a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .foot-ig {
   display: inline-flex;
   align-items: center;
@@ -516,19 +514,6 @@ body.lb-open { overflow: hidden; }
   text-underline-offset: 3px;
 }
 .foot-ig svg { width: 15px; height: 15px; }
-
-.exh-row {
-  display: grid;
-  grid-template-columns: 50px 1fr;
-  gap: 12px;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--hair-soft);
-  font-size: 13.5px;
-  line-height: 1.65;
-}
-.exh-row .y { opacity: 0.62; }
-/* a row with no year (the placeholder note) spans the full width */
-.exh-row.exh-note { grid-template-columns: 1fr; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
@@ -682,17 +667,11 @@ body.lb-open { overflow: hidden; }
   </div>
   <div>
     <h2 class="col-head" data-i18n="inqHead">Sit for a portrait</h2>
-    <p class="inq" data-i18n="inq">Private sittings by appointment, gift vouchers for someone you love, and corporate or editorial commissions — each one joins the same stream.</p>
+    <p class="inq" data-i18n="inq">Private sittings by appointment and corporate or editorial commissions — each one joins the same stream.</p>
     <div class="foot-actions">
       <a class="foot-btn primary" href="#book"><span data-i18n="book">Book a session</span> →</a>
-      <!-- Vouchers are real but have no page yet — point at Instagram until one exists. -->
-      <a class="foot-btn ghost" href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-i18n="vouchers">Gift vouchers</span> →</a>
       <a class="foot-btn ghost" data-contact href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-i18n="corp">Corporate &amp; editorial</span> →</a>
     </div>
-    <p class="foot-meta">
-      <span data-i18n="studioCity">Studio in Sofia</span> ·
-      <a data-contact href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-contact-label>@traits.lozeva</span></a>
-    </p>
     <a class="foot-ig" href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer" data-i18n-aria="instaLabel" aria-label="Instagram — @traits.lozeva (opens in a new tab)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
         <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2"/>
@@ -701,12 +680,6 @@ body.lb-open { overflow: hidden; }
       </svg>
       <span data-i18n="instaText">Instagram · @traits.lozeva</span>
     </a>
-  </div>
-  <div>
-    <h2 class="col-head" data-i18n="exhHead">Exhibitions</h2>
-    <div id="exhibitions">
-      <div class="exh-row exh-note"><span>Exhibition list to follow.</span></div>
-    </div>
   </div>
 </footer>
 
@@ -848,15 +821,9 @@ body.lb-open { overflow: hidden; }
 
     bioHead: "About",
     inqHead: "Sit for a portrait",
-    exhHead: "Exhibitions",
-    vouchers: "Gift vouchers",
     corp: "Corporate & editorial",
-    studioCity: "Studio in Sofia",
-    inq: "Private sittings by appointment, gift vouchers for someone you love, and corporate or editorial commissions — each one joins the same stream.",
-    bio: "traits by lozeva is a black-and-white portrait studio in Sofia. A full biography is to follow.",
-    exhibitions: [
-      { y: "", t: "Exhibition list to follow." }
-    ]
+    inq: "Private sittings by appointment and corporate or editorial commissions — each one joins the same stream.",
+    bio: "traits by lozeva is a black-and-white portrait studio in Sofia. A full biography is to follow."
   };
 
   var BG = {
@@ -916,15 +883,9 @@ body.lb-open { overflow: hidden; }
 
     bioHead: "За нас",
     inqHead: "Запазете портрет",
-    exhHead: "Изложби",
-    vouchers: "Подаръчни ваучери",
     corp: "Корпоративно и редакционно",
-    studioCity: "Студио в София",
-    inq: "Частни сеанси по уговорка, подаръчни ваучери за някого скъп и корпоративни или редакционни поръчки — всяка от тях се влива в същия поток.",
-    bio: "traits by lozeva е студио за черно-бяла портретна фотография в София. Пълната биография предстои.",
-    exhibitions: [
-      { y: "", t: "Списъкът с изложби предстои." }
-    ]
+    inq: "Частни сеанси по уговорка и корпоративни или редакционни поръчки — всяка от тях се влива в същия поток.",
+    bio: "traits by lozeva е студио за черно-бяла портретна фотография в София. Пълната биография предстои."
   };
 
   var DICT = { en: EN, bg: BG };
@@ -954,7 +915,6 @@ body.lb-open { overflow: hidden; }
   var ogImageAlt = document.getElementById("og-image-alt");
   var twTitle = document.getElementById("tw-title");
   var twDesc = document.getElementById("tw-desc");
-  var exhWrap = document.getElementById("exhibitions");
 
   function applyLang(root) {
     var scope = root || document;
@@ -972,7 +932,6 @@ body.lb-open { overflow: hidden; }
       if (ogLocale) ogLocale.setAttribute("content", lang === "bg" ? "bg_BG" : "en_GB");
       document.getElementById("lang-bg").setAttribute("aria-pressed", String(lang === "bg"));
       document.getElementById("lang-en").setAttribute("aria-pressed", String(lang === "en"));
-      renderExhibitions();
     }
 
     scope.querySelectorAll("[data-i18n]").forEach(function (el) {
@@ -993,26 +952,6 @@ body.lb-open { overflow: hidden; }
       var lbImg = document.getElementById("lb-img");
       if (lbImg && lb.open) lbImg.alt = t("photoAlt");
     }
-  }
-
-  function renderExhibitions() {
-    if (!exhWrap) return;
-    exhWrap.textContent = "";
-    t("exhibitions").forEach(function (e) {
-      var row = document.createElement("div");
-      /* a row with no year is a placeholder note — let it span both columns */
-      row.className = e.y ? "exh-row" : "exh-row exh-note";
-      if (e.y) {
-        var y = document.createElement("span");
-        y.className = "y";
-        y.textContent = e.y;
-        row.appendChild(y);
-      }
-      var ttl = document.createElement("span");
-      ttl.textContent = e.t;
-      row.appendChild(ttl);
-      exhWrap.appendChild(row);
-    });
   }
 
   function setLang(next) {
