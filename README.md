@@ -60,19 +60,29 @@ python3 -m http.server 8000
 
 Several things in the site are deliberately provisional and need real values before launch:
 
-- **The About paragraph and the exhibition list are invented placeholder copy**, generated as
-  filler while the layout was designed. They read plausibly, which is precisely what makes
-  them a hazard — they are not verified biography and must not be treated as fact. They are
-  marked in `index.html` with `<!-- PLACEHOLDER COPY — awaiting real text -->` comments so
-  they are easy to find. Awaiting real text.
+- **The About paragraph and the exhibition list are now neutral placeholders.** The earlier
+  invented copy (a fabricated birth year, career length, archive size, and six exhibitions at
+  named real institutions) has been removed in both languages. What ships now says only that
+  a biography and an exhibition list are to follow. **Do not re-introduce invented facts** —
+  replace these with verified text supplied by the photographer.
 - **The personal / corporate photo split is arbitrary** — see above.
-- **The booking link `https://calendly.com/traitsbylozeva/sitting` is a placeholder URL.**
-  Swap it for the real scheduling link.
-- **`hello@traitsbylozeva.com` is a placeholder address.** Point it at the real inbox.
+- **The booking link is real:** `https://calendly.com/traits/traits-studio`. It lives in the
+  `CALENDLY_URL` constant in `index.html`, which rewrites both the widget `data-url` and the
+  no-JS fallback link at runtime — edit that one constant, not the markup.
+- **There is no working email address yet.** `traitsbylozeva.com` has no MX record, so every
+  contact route points at Instagram instead. Set the `CONTACT_EMAIL` constant in `index.html`
+  to a real address and all `[data-contact]` links revert to `mailto:` automatically; the
+  surrounding copy (`formFallback`, `successBody`, `successMail`) is worth revisiting then too.
 - **The corporate enquiry form does not submit anywhere.** It validates input and shows a
   success state, but sends nothing. A single commented `submitEnquiry()` function is left as
-  the seam for wiring a real endpoint — that is the only change needed to make it live.
-- **`#vouchers` is a stub** and links nowhere yet.
+  the seam for wiring a real endpoint — that is the only change needed to make it live. The
+  success copy no longer claims the enquiry was received; it points at Instagram instead.
+- **`#vouchers` had no target**, so the footer button now points at Instagram until a real
+  vouchers page exists.
+- **The social preview image is a stock portrait** (`photos/personal/p001.jpg`, 360×480).
+  Replace `og:image` with a purpose-made 1200×630 asset when one exists.
+- **Session price and duration are deliberately not published on the site.** They are live on
+  Calendly; putting them on the page is the photographer's commercial decision.
 
 Instagram — **`https://www.instagram.com/traits.lozeva/`** — is confirmed and correct. It is
 not a placeholder; leave it as it is.

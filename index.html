@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>traits by lozeva — portraits</title>
 <meta id="meta-desc" name="description" content="Black-and-white portrait photography by lozeva. Studio in Sofia. Personal and corporate sittings by appointment.">
+
+<!-- Social preview. The site is shared mostly via Instagram, so links need a card.
+     og:image is an existing portrait (360x480) — replace with a purpose-made
+     1200x630 asset when one exists. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="traits by lozeva">
+<meta property="og:url" content="https://tseoeo.github.io/traits/">
+<meta id="og-title" property="og:title" content="traits by lozeva — portraits">
+<meta id="og-desc" property="og:description" content="Black-and-white portrait photography by lozeva. Studio in Sofia. Personal and corporate sittings by appointment.">
+<meta property="og:image" content="https://tseoeo.github.io/traits/photos/personal/p001.jpg">
+<meta property="og:image:width" content="360">
+<meta property="og:image:height" content="480">
+<meta property="og:image:alt" content="Black-and-white portrait — traits by lozeva">
+<meta id="og-locale" property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta id="tw-title" name="twitter:title" content="traits by lozeva — portraits">
+<meta id="tw-desc" name="twitter:description" content="Black-and-white portrait photography by lozeva. Studio in Sofia. Personal and corporate sittings by appointment.">
+<meta name="twitter:image" content="https://tseoeo.github.io/traits/photos/personal/p001.jpg">
 <link rel="icon" type="image/png" href="assets/traits-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
@@ -507,6 +525,8 @@ body.lb-open { overflow: hidden; }
   line-height: 1.65;
 }
 .exh-row .y { opacity: 0.62; }
+/* a row with no year (the placeholder note) spans the full width */
+.exh-row.exh-note { grid-template-columns: 1fr; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
@@ -553,12 +573,10 @@ body.lb-open { overflow: hidden; }
       <div class="nojs-note">
         <p lang="en">The portrait gallery needs JavaScript. The work is also on
           <a href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer">Instagram</a>.
-          The enquiry form needs JavaScript too — write to
-          <a href="mailto:hello@traitsbylozeva.com">hello@traitsbylozeva.com</a>.</p>
+          The enquiry form needs JavaScript too — message the studio on Instagram.</p>
         <p lang="bg">Галерията с портрети изисква JavaScript. Работата може да се види и в
           <a href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer">Instagram</a>.
-          Формата за запитване също изисква JavaScript — пишете на
-          <a href="mailto:hello@traitsbylozeva.com">hello@traitsbylozeva.com</a>.</p>
+          Формата за запитване също изисква JavaScript — пишете ни в Instagram.</p>
       </div>
     </noscript>
 
@@ -597,14 +615,15 @@ body.lb-open { overflow: hidden; }
       <h3 class="panel-head" data-i18n="bookPersonal">Personal sitting</h3>
       <p class="panel-note" data-i18n="calendlyNote">Choose a time in the calendar below.</p>
       <div class="calendly-shell">
-        <!-- PLACEHOLDER URL — swap https://calendly.com/traitsbylozeva/sitting before launch -->
+        <!-- This data-url and the fallback link below are the no-JS defaults. At runtime
+             both are rewritten from CALENDLY_URL, which is the single source of truth. -->
         <div class="calendly-inline-widget" id="calendly-widget"
-             data-url="https://calendly.com/traitsbylozeva/sitting?hide_gdpr_banner=1&background_color=eeebe4&text_color=1b1814&primary_color=0e2fc9">
+             data-url="https://calendly.com/traits/traits-studio?hide_gdpr_banner=1&background_color=eeebe4&text_color=1b1814&primary_color=0e2fc9">
           <div class="calendly-placeholder" id="calendly-placeholder" data-i18n="calendlyLoading">Loading the booking calendar…</div>
         </div>
       </div>
       <!-- Works with JS off or the widget blocked -->
-      <a class="plain-link" href="https://calendly.com/traitsbylozeva/sitting" target="_blank" rel="noopener noreferrer" data-i18n="calendlyFallback">Open the booking calendar in a new tab</a>
+      <a class="plain-link" id="calendly-fallback" href="https://calendly.com/traits/traits-studio" target="_blank" rel="noopener noreferrer" data-i18n="calendlyFallback">Open the booking calendar in a new tab</a>
     </div>
 
     <!-- Corporate → mock enquiry form -->
@@ -637,17 +656,17 @@ body.lb-open { overflow: hidden; }
         </div>
         <button type="submit" class="pill-solid" data-i18n="send">Send</button>
         <p class="form-foot">
-          <span data-i18n="formFallback">Prefer email?</span>
-          <a href="mailto:hello@traitsbylozeva.com">hello@traitsbylozeva.com</a>
+          <span data-i18n="formFallback">Prefer to message directly?</span>
+          <a data-contact href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-contact-label>Instagram · @traits.lozeva</span></a>
         </p>
       </form>
 
       <div class="form-success" id="enquiry-success" role="status" hidden>
         <h4 data-i18n="successHead">Thank you.</h4>
-        <p data-i18n="successBody">Your enquiry has been noted.</p>
+        <p data-i18n="successBody">The studio inbox is not live yet, so the quickest way to reach us is Instagram.</p>
         <p>
-          <span data-i18n="successMail">Or write to us directly:</span>
-          <a href="mailto:hello@traitsbylozeva.com">hello@traitsbylozeva.com</a>
+          <span data-i18n="successMail">Message the studio on</span>
+          <a data-contact href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-contact-label>Instagram · @traits.lozeva</span></a>
         </p>
       </div>
     </div>
@@ -657,21 +676,20 @@ body.lb-open { overflow: hidden; }
 <footer class="site-footer">
   <div>
     <h2 class="col-head" data-i18n="bioHead">About</h2>
-    <!-- PLACEHOLDER COPY — awaiting real text -->
-    <p class="bio" data-i18n="bio">Lozeva (b. 1971, Sofia) has photographed in black and white for the past ten years. Her portraits — politicians, writers, actors, scientists, and people otherwise unrecorded — are made in available light, on the same terms, with the same patience. Since 2016 she has kept a single continuous archive; it now holds more than fourteen hundred portraits. traits by lozeva is her working studio in Sofia.</p>
+    <p class="bio" data-i18n="bio">traits by lozeva is a black-and-white portrait studio in Sofia. A full biography is to follow.</p>
   </div>
   <div>
     <h2 class="col-head" data-i18n="inqHead">Sit for a portrait</h2>
     <p class="inq" data-i18n="inq">Private sittings by appointment, gift vouchers for someone you love, and corporate or editorial commissions — each one joins the same stream.</p>
     <div class="foot-actions">
       <a class="foot-btn primary" href="#book"><span data-i18n="book">Book a session</span> →</a>
-      <!-- #vouchers is an intentional dead stub — out of scope -->
-      <a class="foot-btn ghost" href="#vouchers"><span data-i18n="vouchers">Gift vouchers</span> →</a>
-      <a class="foot-btn ghost" href="mailto:hello@traitsbylozeva.com"><span data-i18n="corp">Corporate &amp; editorial</span> →</a>
+      <!-- Vouchers are real but have no page yet — point at Instagram until one exists. -->
+      <a class="foot-btn ghost" href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-i18n="vouchers">Gift vouchers</span> →</a>
+      <a class="foot-btn ghost" data-contact href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-i18n="corp">Corporate &amp; editorial</span> →</a>
     </div>
     <p class="foot-meta">
       <span data-i18n="studioCity">Studio in Sofia</span> ·
-      <a href="mailto:hello@traitsbylozeva.com">hello@traitsbylozeva.com</a>
+      <a data-contact href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer"><span data-contact-label>@traits.lozeva</span></a>
     </p>
     <a class="foot-ig" href="https://www.instagram.com/traits.lozeva/" target="_blank" rel="noopener noreferrer" data-i18n-aria="instaLabel" aria-label="Instagram — @traits.lozeva (opens in a new tab)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -684,14 +702,8 @@ body.lb-open { overflow: hidden; }
   </div>
   <div>
     <h2 class="col-head" data-i18n="exhHead">Exhibitions</h2>
-    <!-- PLACEHOLDER COPY — awaiting real text -->
     <div id="exhibitions">
-      <div class="exh-row"><span class="y">2026</span><span>“Faces” — Sofia City Art Gallery (forthcoming)</span></div>
-      <div class="exh-row"><span class="y">2024</span><span>“Silence” — Goethe-Institut, Sofia</span></div>
-      <div class="exh-row"><span class="y">2023</span><span>Galerie Klein — Berlin</span></div>
-      <div class="exh-row"><span class="y">2021</span><span>“The Writers” — National Library, Sofia</span></div>
-      <div class="exh-row"><span class="y">2019</span><span>Fotoraum — Vienna</span></div>
-      <div class="exh-row"><span class="y">2017</span><span>First solo exhibition — Sofia</span></div>
+      <div class="exh-row exh-note"><span>Exhibition list to follow.</span></div>
     </div>
   </div>
 </footer>
@@ -728,7 +740,46 @@ body.lb-open { overflow: hidden; }
      ================================================================== */
   var GALLERIES = { personal: 122, corporate: 121 };
 
-  var CALENDLY_URL = "https://calendly.com/traitsbylozeva/sitting"; /* PLACEHOLDER — swap before launch */
+  /* ------------------------------------------------------------------
+     Booking link — the single source of truth. The same URL is repeated
+     in the markup as a no-JS default; the sync below rewrites both the
+     widget's data-url and the fallback link from these two constants, so
+     this is the only place that needs editing.
+     ------------------------------------------------------------------ */
+  var CALENDLY_URL = "https://calendly.com/traits/traits-studio";
+  var CALENDLY_PARAMS = "?hide_gdpr_banner=1&background_color=eeebe4&text_color=1b1814&primary_color=0e2fc9";
+
+  (function syncBookingLinks() {
+    var widget = document.getElementById("calendly-widget");
+    if (widget) widget.setAttribute("data-url", CALENDLY_URL + CALENDLY_PARAMS);
+    var fallback = document.getElementById("calendly-fallback");
+    if (fallback) fallback.setAttribute("href", CALENDLY_URL);
+  })();
+
+  /* ------------------------------------------------------------------
+     CONTACT_EMAIL — there is no working inbox yet. traitsbylozeva.com has
+     no MX record, so a mailto: would bounce silently; every contact route
+     therefore points at Instagram, which is confirmed live.
+
+     Set this to a real address and every [data-contact] link reverts to
+     mailto: automatically. This is the only line that needs changing —
+     though the surrounding copy (formFallback / successBody / successMail)
+     is worth revisiting at the same time, since it currently names
+     Instagram as the channel.
+     ------------------------------------------------------------------ */
+  var CONTACT_EMAIL = null;
+
+  (function applyContactRoute() {
+    if (!CONTACT_EMAIL) return;
+    [].forEach.call(document.querySelectorAll("[data-contact]"), function (a) {
+      a.setAttribute("href", "mailto:" + CONTACT_EMAIL);
+      a.removeAttribute("target");
+      a.removeAttribute("rel");
+    });
+    [].forEach.call(document.querySelectorAll("[data-contact-label]"), function (el) {
+      el.textContent = CONTACT_EMAIL;
+    });
+  })();
 
   function photoPath(cat, i) {
     return "photos/" + cat + "/p" + String(i + 1).padStart(3, "0") + ".jpg";
@@ -787,10 +838,10 @@ body.lb-open { overflow: hidden; }
     errEmail: "Please enter your email address.",
     errEmailFormat: "Please enter a valid email address.",
     errNote: "Please add a short note.",
-    formFallback: "Prefer email?",
+    formFallback: "Prefer to message directly?",
     successHead: "Thank you.",
-    successBody: "Your enquiry has been noted.",
-    successMail: "Or write to us directly:",
+    successBody: "The studio inbox is not live yet, so the quickest way to reach us is Instagram.",
+    successMail: "Message the studio on",
 
     bioHead: "About",
     inqHead: "Sit for a portrait",
@@ -799,16 +850,9 @@ body.lb-open { overflow: hidden; }
     corp: "Corporate & editorial",
     studioCity: "Studio in Sofia",
     inq: "Private sittings by appointment, gift vouchers for someone you love, and corporate or editorial commissions — each one joins the same stream.",
-    /* PLACEHOLDER COPY — awaiting real text */
-    bio: "Lozeva (b. 1971, Sofia) has photographed in black and white for the past ten years. Her portraits — politicians, writers, actors, scientists, and people otherwise unrecorded — are made in available light, on the same terms, with the same patience. Since 2016 she has kept a single continuous archive; it now holds more than fourteen hundred portraits. traits by lozeva is her working studio in Sofia.",
-    /* PLACEHOLDER COPY — awaiting real text */
+    bio: "traits by lozeva is a black-and-white portrait studio in Sofia. A full biography is to follow.",
     exhibitions: [
-      { y: "2026", t: "“Faces” — Sofia City Art Gallery (forthcoming)" },
-      { y: "2024", t: "“Silence” — Goethe-Institut, Sofia" },
-      { y: "2023", t: "Galerie Klein — Berlin" },
-      { y: "2021", t: "“The Writers” — National Library, Sofia" },
-      { y: "2019", t: "Fotoraum — Vienna" },
-      { y: "2017", t: "First solo exhibition — Sofia" }
+      { y: "", t: "Exhibition list to follow." }
     ]
   };
 
@@ -861,10 +905,10 @@ body.lb-open { overflow: hidden; }
     errEmail: "Моля, въведете вашия имейл адрес.",
     errEmailFormat: "Моля, въведете валиден имейл адрес.",
     errNote: "Моля, добавете кратко съобщение.",
-    formFallback: "Предпочитате имейл?",
+    formFallback: "Предпочитате директно съобщение?",
     successHead: "Благодарим.",
-    successBody: "Вашето запитване е отбелязано.",
-    successMail: "Или ни пишете директно:",
+    successBody: "Имейл кутията на студиото още не е активна, затова най-бързият начин да се свържете с нас е Instagram.",
+    successMail: "Пишете на студиото в",
 
     bioHead: "За нас",
     inqHead: "Запазете портрет",
@@ -873,16 +917,9 @@ body.lb-open { overflow: hidden; }
     corp: "Корпоративно и редакционно",
     studioCity: "Студио в София",
     inq: "Частни сеанси по уговорка, подаръчни ваучери за някого скъп и корпоративни или редакционни поръчки — всяка от тях се влива в същия поток.",
-    /* PLACEHOLDER COPY — awaiting real text */
-    bio: "Лозева (р. 1971, София) снима черно-бяла фотография през последните десет години. Портретите ѝ — политици, писатели, актьори, учени и хора, останали извън летописа — са правени на естествена светлина, при едни и същи условия, с едно и също търпение. От 2016 г. поддържа един непрекъснат архив; днес той съдържа повече от хиляда и четиристотин портрета. traits by lozeva е нейното работещо студио в София.",
-    /* PLACEHOLDER COPY — awaiting real text */
+    bio: "traits by lozeva е студио за черно-бяла портретна фотография в София. Пълната биография предстои.",
     exhibitions: [
-      { y: "2026", t: "„Лица“ — Софийска градска художествена галерия (предстояща)" },
-      { y: "2024", t: "„Тишина“ — Гьоте-институт, София" },
-      { y: "2023", t: "Galerie Klein — Берлин" },
-      { y: "2021", t: "„Писателите“ — Национална библиотека, София" },
-      { y: "2019", t: "Fotoraum — Виена" },
-      { y: "2017", t: "Първа самостоятелна изложба — София" }
+      { y: "", t: "Списъкът с изложби предстои." }
     ]
   };
 
@@ -907,6 +944,11 @@ body.lb-open { overflow: hidden; }
   }
 
   var metaDesc = document.getElementById("meta-desc");
+  var ogTitle = document.getElementById("og-title");
+  var ogDesc = document.getElementById("og-desc");
+  var ogLocale = document.getElementById("og-locale");
+  var twTitle = document.getElementById("tw-title");
+  var twDesc = document.getElementById("tw-desc");
   var exhWrap = document.getElementById("exhibitions");
 
   function applyLang(root) {
@@ -916,6 +958,12 @@ body.lb-open { overflow: hidden; }
       document.documentElement.lang = lang;
       document.title = t("title");
       if (metaDesc) metaDesc.setAttribute("content", t("metaDesc"));
+      /* keep the social card in step with the chosen language */
+      if (ogTitle) ogTitle.setAttribute("content", t("title"));
+      if (twTitle) twTitle.setAttribute("content", t("title"));
+      if (ogDesc) ogDesc.setAttribute("content", t("metaDesc"));
+      if (twDesc) twDesc.setAttribute("content", t("metaDesc"));
+      if (ogLocale) ogLocale.setAttribute("content", lang === "bg" ? "bg_BG" : "en_GB");
       document.getElementById("lang-bg").setAttribute("aria-pressed", String(lang === "bg"));
       document.getElementById("lang-en").setAttribute("aria-pressed", String(lang === "en"));
       renderExhibitions();
@@ -946,13 +994,16 @@ body.lb-open { overflow: hidden; }
     exhWrap.textContent = "";
     t("exhibitions").forEach(function (e) {
       var row = document.createElement("div");
-      row.className = "exh-row";
-      var y = document.createElement("span");
-      y.className = "y";
-      y.textContent = e.y;
+      /* a row with no year is a placeholder note — let it span both columns */
+      row.className = e.y ? "exh-row" : "exh-row exh-note";
+      if (e.y) {
+        var y = document.createElement("span");
+        y.className = "y";
+        y.textContent = e.y;
+        row.appendChild(y);
+      }
       var ttl = document.createElement("span");
       ttl.textContent = e.t;
-      row.appendChild(y);
       row.appendChild(ttl);
       exhWrap.appendChild(row);
     });
