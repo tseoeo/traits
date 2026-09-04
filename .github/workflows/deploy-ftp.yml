@@ -55,6 +55,11 @@ jobs:
           protocol: ftps
           port: 21
           server-dir: ./
+          # Diagnostics for the "Server sent FIN packet unexpectedly" failure the
+          # host throws partway through the first full upload. basic-ftp redacts
+          # the password itself, and GitHub masks secret values in logs.
+          log-level: verbose
+          timeout: 120000
           # Specifying exclude replaces the action's defaults, so the .git
           # patterns have to be restated here or the repo metadata ships.
           exclude: |
