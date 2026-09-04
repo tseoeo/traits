@@ -1,0 +1,64 @@
+# ---------------------------------------------------------------------------
+# traits by lozeva — https://traits.yanalozeva.com/
+#
+# This file belongs to /home/yanaloz/traits.yanalozeva.com ONLY.
+# Never place or edit an .htaccess at /home/yanaloz/ or in public_html/ —
+# that directory is Yana's live WordPress and is off limits.
+# ---------------------------------------------------------------------------
+
+# --- Force HTTPS -----------------------------------------------------------
+# Two conditions, not one: on a TLS-terminating proxy %{HTTPS} can be unset
+# even though the client is on HTTPS, and redirecting in that case would be an
+# infinite loop. X-Forwarded-Proto is the second opinion.
+# .well-known is exempt so AutoSSL's HTTP validation can never be redirected
+# away mid-renewal.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- Deny dotfiles ---------------------------------------------------------
+# Chiefly .ftp-deploy-sync-state.json, which the deploy action writes into the
+# document root and which enumerates every deployed filename.
+#
+# FilesMatch tests the final path segment only, so ACME challenge files inside
+# /.well-known/ (their names do not begin with a dot) stay reachable and
+# certificate renewal is unaffected.
+<FilesMatch "^\.">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# --- Caching ---------------------------------------------------------------
+# 30 days for the two asset directories, deliberately NOT "immutable" and not a
+# year: photo filenames are positional (p001.jpg), so a future re-cut of the
+# personal/corporate sets would reuse them. A month is a large win that still
+# self-heals; immutable would strand a stale photo in caches until 2027.
+<IfModule mod_headers.c>
+  SetEnvIf Request_URI "^/(photos|assets)/" LONG_CACHE
+  Header set Cache-Control "public, max-age=2592000" env=LONG_CACHE
+
+  # The page itself is one file that changes on every deploy — always revalidate.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png  "access plus 30 days"
+  ExpiresByType text/html  "access plus 0 seconds"
+</IfModule>
+
+# --- Misc ------------------------------------------------------------------
+DirectoryIndex index.html
+Options -Indexes

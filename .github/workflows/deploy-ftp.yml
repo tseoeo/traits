@@ -1,0 +1,67 @@
+name: Deploy to SuperHosting (FTPS)
+
+# ---------------------------------------------------------------------------
+# Publishes the site to https://traits.yanalozeva.com/ over FTPS on every push.
+#
+# 🛑 THE SHARED-HOSTING HAZARD
+# This cPanel account also serves Yana's live WordPress portfolio at
+# yanalozeva.com, document root /home/yanaloz/public_html. It is unrelated to
+# this project and nothing here may reach it. The FTP user below is scoped to
+# /home/yanaloz/traits.yanalozeva.com, a SIBLING of public_html, so it cannot
+# see her site at all. That scoping is the primary protection — do not weaken
+# it, and do not "fix" a deploy problem by widening it.
+#
+# Verified by dry run before this workflow existed: a test file uploaded here
+# appeared at traits.yanalozeva.com, returned 404 on yanalozeva.com, and left
+# her site byte-identical (SHA-256 ba7b12b7…ccb0ed).
+#
+# NEVER change any of the following:
+#   * dangerous-clean-slate — must stay absent. It wipes the remote directory
+#     before uploading; combined with a wrong server-dir that deletes a website.
+#   * server-dir — must stay "./". The scoped user logs straight into its own
+#     document root. Never "/" and never a parent path.
+#   * protocol — must stay ftps. Plain ftp sends the password in clear text on
+#     every deploy.
+#   * credentials — never add a second FTP account, and never use
+#     deploy@yanalozeva.com: that one is scoped to the whole cPanel account.
+#
+# The GitHub Pages workflow is intentionally left running. Both copies stay
+# live until cutover is confirmed; index.html carries a canonical pointing here.
+# ---------------------------------------------------------------------------
+
+on:
+  push:
+    branches: [claude/pensive-mendel-tbxm4p]
+  workflow_dispatch:
+
+concurrency:
+  group: ftp-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Upload site over FTPS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: ./
+          # Specifying exclude replaces the action's defaults, so the .git
+          # patterns have to be restated here or the repo metadata ships.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            *.md
+            traits site.zip
+            config.php
+          # dangerous-clean-slate intentionally omitted (defaults to false).

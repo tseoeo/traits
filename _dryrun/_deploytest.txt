@@ -1,8 +1,0 @@
-traits — SuperHosting deploy dry run (Round 5)
-
-If you are reading this at https://traits.yanalozeva.com/_deploytest.txt then the
-scoped FTPS deploy works and lands in the correct document root.
-
-This file is a throwaway. It is deleted by the first real deploy.
-
-marker: traits-dryrun-r5-8f21ac
