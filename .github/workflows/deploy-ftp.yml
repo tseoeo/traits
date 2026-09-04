@@ -55,10 +55,14 @@ jobs:
           protocol: ftps
           port: 21
           server-dir: ./
-          # Diagnostics for the "Server sent FIN packet unexpectedly" failure the
-          # host throws partway through the first full upload. basic-ftp redacts
-          # the password itself, and GitHub masks secret values in logs.
-          log-level: verbose
+          # The first two full-site attempts died with "Server sent FIN packet
+          # unexpectedly" a few seconds in, after the folders and the two small
+          # dotfiles. The third, with this raised timeout, completed all 250
+          # files in ~2m57s. Whether the timeout fixed it or the host simply
+          # stopped dropping connections is not proven — either way, leave it
+          # raised. A deploy takes about three minutes, so 30s was tight.
+          # If it recurs, re-run first: the sync state makes it resumable, and
+          # never reach for dangerous-clean-slate.
           timeout: 120000
           # Specifying exclude replaces the action's defaults, so the .git
           # patterns have to be restated here or the repo metadata ships.
