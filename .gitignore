@@ -6,3 +6,7 @@ ORCHESTRATOR_BRIEF.md
 
 # macOS cruft
 .DS_Store
+
+# Hosting notes and SMTP credentials — never commit
+HOSTING_PLAN.md
+config.php
